@@ -1,0 +1,44 @@
+<header class="d-flex flex-wrap justify-content-start align-items-center shadow fixed-top border-bottom">
+  <a href="/" class="d-flex align-items-start mb-1 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <span class="fs-4 h3 mx-5 alert">E-keûr</span>
+  </a>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Accueil</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Nos locations</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+
+  </ul>
+
+</header>
+<div class="container py-5 mt-5">
+  <div class="jumbotron">
+    <h1 class="display-3">RENDEZ-VOUS</h1>
+    <h2 class="lead py-5" style="text-align: center;" ><u> Tableau de liste des render-vous possible</u></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">N render-vouz</th>
+          <th scope="col">Lieu</th>
+          <th scope="col">Date</th>
+          <th scope="col">Heure</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of rendervous.data">
+          <th scope="1">{{item.id}}</th>
+          <td>{{item.adresse}}</td>
+          <td>{{item.date}}</td>
+          <td>{{item.heure}}</td>
+          <button type="button" class="btn btn-primary btn-sm mt-2 ml-6" (click)=" prendreRV(item.id)">Valider</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+

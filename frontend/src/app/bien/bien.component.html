@@ -1,0 +1,286 @@
+<header class="d-flex flex-wrap justify-content-start align-items-center shadow fixed-top border-bottom">
+  <a href="/" class="d-flex align-items-start mb-1 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <span class="fs-4 h3 mx-5 alert">E-keûr</span>
+  </a>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a routerLink="/gestionBien" class="nav-link" >gestion Bien</a></li>
+    <li class="nav-item"><a routerLink="/gestionEtudaint" class="nav-link">gestion des client</a></li>
+    <li class="nav-item"><a routerLink="/liste_rendez-vous" class="nav-link">gestion rendez-vous</a></li>
+    <li class="nav-item"><a routerLink="/user" class="nav-link">profil</a></li>
+  </ul>
+
+</header>
+
+<section class="py-5 text-center home">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+       <h1 class="fw-light">Vous étes dans E-KEUR</h1>
+
+    </div>
+  </div>
+</section>
+
+<!-- <nz-modal [nzMaskClosable]="false" nzWidth="700px" [nzContent]="contentCreate" [(nzVisible)]="isvisibleBien"
+
+nzTitle="Ajouter Bien" [nzFooter]="null">
+  <ng-template #contentCreate>
+    <form nz-form [formGroup]="validateFormBien" (ngSubmit)="submitFormBien()">
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>prix</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzValidatingTip="Validating...">
+          <input nz-input formControlName="prix" placeholder="prix" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>description</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+
+            <textarea
+              nz-input
+              placeholder="description"
+              [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+              formControlName="description">description</textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>image</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="image" placeholder="image"  type="file" (change)="onFileSelect($event)"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>nbrOccupant</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="nbrOccupant" placeholder="nbrOccupant" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>lieuLogement</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="lieuLogement" placeholder="lieuLogement" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>catégorie</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="categorie"  name ="categorie" formControlName="categories_id">
+            <nz-option  *ngFor="let item of categoriesBien" [nzLabel]="item.nom" [nzValue]="item.id"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary"  [nzLoading]="BienIsLoad" class="login-form-button login-form-margin"
+            (click)="AjoutBien()">Submit</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    </ng-template>
+
+</nz-modal> -->
+
+
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow">
+        <div class="card-header">
+          <h4 class="card-title"> tableau chambre disponibles    <button type="button" class="btn btn-primary" style="width: 60px;"  (click)="openAjoutBIen()"><i class="icon ion-md-add " ></i></button></h4>
+
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  prix
+                </th>
+                <th>
+                  description
+                </th>
+                <th>
+                  nombre occupant
+                </th>
+                <th class="text-right">
+                  lieu
+                </th>
+                <th class="text-right">
+                  image
+                </th>
+                <th class="text-right">
+                  Action
+                </th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of chambre.data" >
+                  <td>
+                    {{item.prix}}
+                  </td>
+                  <td>
+                    {{item.description}}
+                  </td>
+                  <td>
+                   {{item.nbrOccupant}}
+                  </td>
+                  <td>
+                    {{item.lieuLogement}}
+                   </td>
+                   <td>
+                     <img style="width: 100px;height: 50px;" src="{{item. image}}" alt="">
+
+                   </td>
+                  <td class="text-right">
+                    <button type="button" class="btn btn-danger" ><i class="icon ion-md-trash"></i></button>
+                    <button type="button" class="btn btn-secondary mt-2 ml-5" ><i class="icon ion-md-brush"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card shadow mt-2">
+        <div class="card-header">
+          <h4 class="card-title"> tableau maison disponibles</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  prix
+                </th>
+                <th>
+                  description
+                </th>
+                <th>
+                  nombre occupant
+                </th>
+                <th class="text-right">
+                  lieu
+                </th>
+                <th class="text-right">
+                  image
+                </th>
+                <th class="text-right">
+                  Action
+                </th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of maisons.data" >
+                  <td>
+                    {{item.prix}}
+                  </td>
+                  <td>
+                    {{item.description}}
+                  </td>
+                  <td>
+                   {{item.nbrOccupant}}
+                  </td>
+                  <td>
+                    {{item.lieuLogement}}
+                   </td>
+                   <td>
+                     <img style="width: 100px;height: 50px;" src="{{item. image}}" alt="">
+
+                   </td>
+                  <td class="text-right">
+                    <button type="button" class="btn btn-danger" ><i class="icon ion-md-trash"></i></button>
+                    <button type="button" class="btn btn-secondary mt-2" ><i class="icon ion-md-brush"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <nz-modal [nzMaskClosable]="false" nzWidth="700px" [nzContent]="contentCreate" [(nzVisible)]="isvisibleBien"
+  nzTitle="Ajouter Bien" [nzFooter]="null">
+    <ng-template #contentCreate>
+      <form nz-form [formGroup]="validateFormBien" (ngSubmit)="submitFormBien()">
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>prix</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzValidatingTip="Validating...">
+            <input nz-input formControlName="prix" placeholder="prix" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>description</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+
+              <textarea
+                nz-input
+                placeholder="description"
+                [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+                formControlName="description">description</textarea>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>image</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input formControlName="image" placeholder="image"  type="file" (change)="onFileSelect($event)"/>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>nbrOccupant</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input formControlName="nbrOccupant" placeholder="nbrOccupant" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>lieuLogement</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input formControlName="lieuLogement" placeholder="lieuLogement" />
+          </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>catégorie</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="categorie"  name ="categorie" formControlName="categories_id">
+              <nz-option  *ngFor="let item of categoriesBien" [nzLabel]="item.nom" [nzValue]="item.id"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control [nzOffset]="7" [nzSpan]="12">
+            <button nz-button nzType="primary"  [nzLoading]="BienIsLoad" class="login-form-button login-form-margin"
+              (click)="AjoutBien()">Submit</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      </ng-template>
+
+  </nz-modal>
+
+</div>

@@ -1,0 +1,141 @@
+
+<div class="container py-5">
+  <div class="jumbotron">
+    <h1 class="display-3">Bienvenue</h1>
+    <p class="lead">{{user.prenom}} {{user.nom}}</p>
+    <hr class="my-2">
+    <p>{{user.email}}</p>
+    <p class="lead">
+      <a  href="Jumbo action link" role="button">Déconnexion</a>
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow">
+        <div class="card-header">
+          <h4 class="card-title">  Tableau Gérant</h4>
+          <button type="button" class="btn btn-primary "(click)="openCompteModul()" ><i class="icon ion-md-add "></i></button>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  prenom
+                </th>
+                <th>
+                  nom
+                </th>
+                <th>
+                  telephone
+                </th>
+
+                <th>
+                  adresse
+                </th>
+
+                <th>
+                  email
+                </th>
+                <th class="text-right">
+                  Action
+                </th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of toutGerant">
+                  <td>
+                    {{item.prenom}}
+                  </td>
+                  <td>
+                    {{item.nom}}
+                  </td>
+                  <td>
+                    {{item.telephone}}
+                  </td>
+
+                  <td>
+                    {{item.adresse}}
+                  </td>
+
+                  <td>
+                    {{item.email}}
+                  </td>
+
+                  <td class="text-right">
+                    <button type="button" class="btn btn-danger mr-2"  ><i class="icon ion-md-trash"></i></button>
+                    <button type="button" class="btn btn-secondary mr-2" ><i class="icon ion-md-brush"></i></button>
+                  </td>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<nz-modal [nzMaskClosable]="false" nzWidth="700px" [nzContent]="contentCreate" [(nzVisible)]="isvisibleC"
+  nzTitle="Creer un compte" [nzFooter]="null">
+  <ng-template #contentCreate>
+    <form nz-form [formGroup]="validateFormC" (ngSubmit)="submitFormC()">
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Nom</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzValidatingTip="Validating...">
+          <input nz-input formControlName="nom" placeholder="nom" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Prenom</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="prenom" placeholder="prenom" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Telephone</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="telephone" placeholder="telephone" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Adresse</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="adresse" placeholder="adresse" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="champ requis ...">
+          <input nz-input formControlName="email" placeholder="email" type="email" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzDisableAutoTips nzErrorTip="Please input your password!">
+          <input nz-input type="password" formControlName="password" placeholder="mot de passe" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary"   class="login-form-button login-form-margin"
+            (click)="CreerCompte()">Submit</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    </ng-template>
+
+</nz-modal>
+
+

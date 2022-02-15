@@ -1,0 +1,174 @@
+<header class="d-flex flex-wrap justify-content-start align-items-center shadow fixed-top border-bottom">
+  <a href="/" class="d-flex align-items-start mb-1 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <span class="fs-4 h3 mx-5 alert">E-keûr</span>
+  </a>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a href="#" class="nav-link" routerLink="/location">Nos locations</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+
+  </ul>
+  <a class="btn btn-primary my-2 mx-2 " (click)="openrecherche()">Recherche</a>
+  <a  type="button" class="btn btn-secondary my-2 mx-2 justify-content-end"  (click)="openLoginModal()">Connexion</a>
+
+</header>
+
+
+<section class="py-5 m-0 p-0 text-center home">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Bienvenue dans E-KEUR</h1>
+        <div class="py-5">
+          <!-- <button type="button" class="btn btn-secondary" style="width: 200px; height: 50px;" (click)="openCompteModul()">Creer un Compte</button> -->
+        </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div *ngFor="let item of chambre.data" class="col">
+        <div class="card shadow mb-5">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ item.image}}" role="img"
+            aria-label="Placeholder: Thumbnail">
+
+          <div class="card-body">
+            <div class="card-body"><p>
+              <p class="card-text"> <u>Prix</u>  : {{ item.prix }} </p>
+              <p class="card-text"> <u>Lieu</u>  : {{ item.lieuLogement }} </p>
+              <p class="card-text"> <u>nombre d'occupant</u>  : {{ item.nbrOccupant }} </p>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<nz-modal [(nzVisible)]="rechercheIsvisible" nzTitle="Recherche" [nzFooter]="null">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validaterecherche" (ngSubmit)="submitFormREcherche()">
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="L'adressse est requi!">
+          <nz-input-group>
+            <input type="text" nz-input formControlName="lieu" placeholder="lieu" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="categorie" class="login-form-button login-form-margin" name ="categorie" formControlName="categorie">
+        <nz-option  *ngFor="let item of categories" [nzLabel]="item.nom" [nzValue]="item.nom"></nz-option>
+      </nz-select>
+      <button nz-button   (click)="recherche()" [nzType]="'primary'">envoyer</button>
+
+    </form>
+  </ng-container>
+</nz-modal>
+
+<nz-modal [nzMaskClosable]="false" [(nzVisible)]="isVisible" nzTitle="Se connecter" [nzFooter]="null">
+  <ng-container *nzModalContent>
+
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onSubmit(validateForm)">
+      <nz-form-item>
+        <div class="col-sm-12   alert alert-danger"  role="alert" *ngIf = "message" >
+          <strong>email ou mot de passe incorrecte</strong>
+        </div>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="L'adressse est requi!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="email" nz-input formControlName="email" placeholder="email" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="mt-3">
+        <nz-form-control nzErrorTip="Le password est requi!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Mot de passe" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div nz-row class="login-form-margin">
+        <div nz-col [nzSpan]="12">
+          <a class="login-form-forgot">Mot pass oublié?</a>
+        </div>
+      </div>
+
+      <button nz-button
+        class="login-form-button login-form-margin" [nzType]="'primary'" type="submit">Se connecter</button>
+
+
+
+    </form>
+
+  </ng-container>
+</nz-modal>
+
+
+<nz-modal [nzMaskClosable]="false" nzWidth="700px" [nzContent]="contentCreate" [(nzVisible)]="isvisibleC"
+  nzTitle="Creer un compte" [nzFooter]="null">
+  <ng-template #contentCreate>
+    <form nz-form [formGroup]="validateFormC" (ngSubmit)="submitFormC()">
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Nom</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzValidatingTip="Validating...">
+          <input nz-input formControlName="nom" placeholder="nom" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Prenom</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="prenom" placeholder="prenom" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Telephone</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="telephone" placeholder="telephone" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Adresse</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="adresse" placeholder="adresse" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="champ requis ...">
+          <input nz-input formControlName="email" placeholder="email" type="email" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzDisableAutoTips nzErrorTip="Please input your password!">
+          <input nz-input type="password" formControlName="password" placeholder="mot de passe" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary"  [nzLoading]="compteisload" class="login-form-button login-form-margin"
+            (click)="CreerCompte()">Submit</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    </ng-template>
+
+</nz-modal>

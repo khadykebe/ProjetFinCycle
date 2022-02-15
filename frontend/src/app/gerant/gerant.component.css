@@ -1,0 +1,29 @@
+.home{
+  background: url(https://image.freepik.com/photos-gratuite/salon-mur-blanc-canape-decoration-rendu-3d_41470-3282.jpg) no-repeat;
+  height: 100px;
+}
+
+.login-form {
+  max-width: 100%;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: none;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+a{
+  color: black;
+  font-size: 20px;
+}
+span{
+  color: black;
+  font-size: 20px;
+}
